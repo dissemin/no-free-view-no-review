@@ -21,7 +21,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('sign', views.SignView.as_view(), name='sign'),
     path('about', views.about, name='about'),
-    path('faq', views.about, name='faq'),
+    path('faq', views.faq, name='faq'),
     path('captcha/', include('captcha.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),

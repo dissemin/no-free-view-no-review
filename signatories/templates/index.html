@@ -4,7 +4,35 @@
 
 {% block content %}
 
-<p>Lorem ipsum</p>
+<p>The knowledge developed by academic research is the common heritage of
+mankind. Sadly, this heritage is only available to a chosen few, as it is
+published in subscription-only journals and locked away behind paywalls.
+Scientific publishers benefit from this model by charging expensive subscription
+fees to universities and libraries, even though this money does not contribute
+to the research itself. It is now obvious that this outdated and unethical model
+should be changed, with research articles made available for free on the
+Internet for everyone. The modest cost of online publications, which are far
+less than the current subscription costs, should not be covered by readers, but
+by universities, research agencies, and other actors.</p>
+
+<p>The current model is made possible by the volunteer work of researchers, in
+two ways: publishing their research in closed-access venues, and serving
+as unpaid peer reviewers to evaluate the submitted research. We understand that
+publication practices are slow to change, because the prestige attached to
+existing journals is an important part of how researchers is evaluated, and
+because publication is often a collaborative effort involving students and other
+untenured researchers. However, the choice to review is an individual one, often
+performed by more senior researchers. Thus, we hope that by allocating our
+reviewing time in priority to open-access venues, we can contribute to their
+quality and shift the publication model away from closed-access venues.</p>
+
+<p><strong>For this reason, we pledge to give priority to open-access venues in
+  how we allocate our reviewing time, program committee or board membership, and
+  organizational efforts. We pledge that we will avoid serving as reviewers for
+  venues which will not make publicly available the research that we have
+  reviewed.</strong> We reserve the right to make exceptions to this policy when
+warranted by the scientific interest, or if we wish to reciprocate by giving a
+fair number of reviews to venues where we have published</p>
 
 {% if not pledge_signed %}
 <h2>Take the pledge</h2>
@@ -16,9 +44,9 @@
 {% endif %}
 
 {% else %}
-<h2>Thank you for taking the pledge</h2>
+<h2>Thank you for taking the pledge!</h2>
 
-<p>Share it with your colleagues:</p>
+<p>Share it with your colleagues and collaborators:</p>
 <div class="share-buttons">
         <a href="{{ social_links.twitter }}"><img src="{% static "img/twitter.png" %}" alt="Share on Twitter" /></a>
         <a href="{{ social_links.reddit }}"><img src="{% static "img/reddit.png" %}" alt="Share on Reddit" /></a>

@@ -22,6 +22,7 @@
                 <h1><a href="{% url 'index' %}">{{ pledge_title }}</a></h1>
                 <div id="toplinks">
                 <ul class="nav nav-pills">
+                     <li role="presentation"><a href="{% url 'faq' %}">FAQ</a></li>
                      <li role="presentation"><a href="{% url 'about' %}">About</a></li>
                      {% if request.user.is_authenticated %}
                      <li role="presentation"><a href="/accounts/logout">Log out</a></li>

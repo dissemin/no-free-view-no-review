@@ -1,0 +1,6 @@
+django
+django-allauth
+django-crispy-forms
+html5validate
+html5lib
+django-simple-captcha

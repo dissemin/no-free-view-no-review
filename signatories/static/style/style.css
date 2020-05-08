@@ -1,0 +1,46 @@
+
+#container {
+        max-width: 1280px;
+        margin: auto;
+}
+
+#signatories {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+}
+
+#toplinks {
+        float: right;
+        margin-top: 30px;
+}
+
+h1 {
+        display: inline-block;
+}
+
+hr {
+        margin-top: 10px;
+        margin-bottom: 15px;
+}
+
+.clear {
+        clear: both;
+}
+
+.share-buttons img {
+        height: 2em;
+}
+
+#signatories ul {
+        list-style: decimal;
+        margin: 0;
+}
+
+.small-orcid {
+        height: 1em;
+}
+
+.button-orcid {
+        height: 1.5em;
+}

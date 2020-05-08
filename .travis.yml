@@ -1,0 +1,30 @@
+language: python
+
+python:
+  - 3.5
+  - 3.6
+  - 3.7
+
+before_install:
+  - export DJANGO_SETTINGS_MODULE=nfvnr.settings
+  - export PYTHONPATH=$HOME/builds/dissemin/no-free-view-no-review
+  - export PIP_USE_MIRRORS=true
+  - echo "from .dev import *" > nfvnr/settings/__init__.py
+
+install:
+  - pip install setuptools --upgrade
+  - pip install -r requirements.txt --upgrade
+  - pip install coveralls
+  - ./pyflakes.sh
+  - pip freeze
+
+script:
+  - coverage run --source=signatories manage.py test
+
+after_success:
+  - coveralls
+
+cache:
+  directories:
+  - $HOME/.pip-cache/
+

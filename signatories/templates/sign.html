@@ -1,0 +1,11 @@
+{% extends "skeleton.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h2>Take the pledge</h2>
+<form method="post" action="{% url 'sign' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="Sign" class="btn btn-primary" />
+</form>
+{% endblock %}

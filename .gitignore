@@ -1,0 +1,8 @@
+.venv
+.coverage
+*.swp
+*.pyc
+__pycache__
+pyflakes.out
+nfvnr/settings/__init__.py
+*.sqlite3

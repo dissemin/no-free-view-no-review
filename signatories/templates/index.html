@@ -1,0 +1,52 @@
+{% extends "skeleton.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<p>Lorem ipsum</p>
+
+{% if not pledge_signed %}
+<h2>Take the pledge</h2>
+
+{% if request.user.is_authenticated %}
+<p><a class="btn btn-primary" href="/sign"><img src="{% static "img/orcid.png" %}" class="button-orcid" alt="ORCID" />&nbsp;Sign the pledge</a></p>
+{% else %}
+<p><a class="btn btn-primary" href="/accounts/orcid/login?next=/sign"><img src="{% static "img/orcid.png" %}" class="button-orcid" alt="ORCID" />&nbsp;With ORCID</a> or <a class="btn btn-default" href="/sign">Manually</a></p>
+{% endif %}
+
+{% else %}
+<h2>Thank you for taking the pledge</h2>
+
+<p>Share it with your colleagues:</p>
+<div class="share-buttons">
+        <a href="{{ social_links.twitter }}"><img src="{% static "img/twitter.png" %}" alt="Share on Twitter" /></a>
+        <a href="{{ social_links.reddit }}"><img src="{% static "img/reddit.png" %}" alt="Share on Reddit" /></a>
+        <a href="{{ social_links.facebook }}"><img src="{% static "img/facebook.png" %}" alt="Share on Facebook" /></a>
+        <a href="{{ social_links.email }}"><img src="{% static "img/email.png" %}" alt="Share by email" /></a>
+</div>
+{% endif %}
+
+<h2>Signatories <span class="badge">{{ signatories|length }}</span></h2>
+
+<div id="signatories">
+<ul>
+{% for signatory in signatories %}
+    <li>
+       {% if signatory.homepage %}
+          <a href="{{ signatory.homepage }}" target="_blank">{{ signatory.name }}</a>
+       {% else %}
+          {{ signatory.name }}
+       {% endif %}
+       {% if signatory.orcid %}
+          <a href="{{ signatory.orcid_url }}" target="_blank"><img src="{% static "img/orcid.png" %}" class="small-orcid" alt="ORCID" /></a>
+       {% endif %}
+       {% if signatory.affiliation %}
+          ({{ signatory.affiliation }})
+       {% endif %}
+    </li>
+{% endfor %}
+</ul>
+</div>
+
+{% endblock %}

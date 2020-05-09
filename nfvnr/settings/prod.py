@@ -1,6 +1,4 @@
-# Development settings, do not use in production!
-
-from common import *
+from .common import *
 
 DEBUG = False
 
@@ -9,8 +7,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'nofreeviewnoreview',
         'USER': 'nofreeviewnoreview',
-        'PASSWORD': POSTGRES_PASSWORD,
-        'HOST': POSTGRES_HOST,
+        'PASSWORD': '',
+        'HOST': '',
         'DISABLE_SERVER_SIDE_CURSORS': False,
     }
 }

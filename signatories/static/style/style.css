@@ -10,6 +10,16 @@
         column-count: 2;
 }
 
+.logo-float {
+        float: right;
+        margin-left: 10px;
+        margin-bottom: 10px;
+}
+
+.logo-float img {
+        width: 200px;
+}
+
 #toplinks {
         float: right;
         margin-top: 1em;

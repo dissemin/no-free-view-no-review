@@ -12,7 +12,7 @@
 
 #toplinks {
         float: right;
-        margin-top: 30px;
+        margin-top: 1em;
 }
 
 h1 {
@@ -22,6 +22,7 @@ h1 {
 hr {
         margin-top: 10px;
         margin-bottom: 15px;
+        border: 1px solid #000;
 }
 
 .clear {
@@ -43,4 +44,9 @@ hr {
 
 .button-orcid {
         height: 1.5em;
+}
+
+html {
+  padding-left: 2em;
+  padding-right: 2em;
 }

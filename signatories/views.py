@@ -54,6 +54,12 @@ def about(request):
     }
     return render(request, 'about.html', context)
 
+def faq(request):
+    context = {
+        'pledge_title': settings.PLEDGE_TITLE
+    }
+    return render(request, 'faq.html', context)
+
 class SignatoryBaseForm(forms.Form):
     name = forms.CharField(required=True, label='Name', max_length=256)
     affiliation = forms.CharField(required=False, label='Affiliation (optional)', max_length=256)

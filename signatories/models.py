@@ -37,7 +37,7 @@ class Signatory(models.Model):
         send_mail(
             'Email confirmation for "{}"'.format(settings.PLEDGE_TITLE),
             message,
-            settings.ORGANIZERS_EMAIL,
+            settings.CONFIRMATION_SENDING_EMAIL,
             [self.email],
             fail_silently=False,
         )

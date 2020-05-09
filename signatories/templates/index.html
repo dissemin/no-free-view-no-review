@@ -42,9 +42,9 @@ fair number of reviews to venues where we have published</p>
 <h2>Take the pledge</h2>
 
 {% if request.user.is_authenticated %}
-<p><a class="btn btn-primary" href="/sign"><img src="{% static "img/orcid.png" %}" class="button-orcid" alt="ORCID" />&nbsp;Sign the pledge</a></p>
+<p><a class="btn btn-primary" href="/sign">Sign the pledge&nbsp;<img src="{% static "img/orcid.png" %}" class="button-orcid" alt="ORCID" /></a></p>
 {% else %}
-<p><a class="btn btn-primary" href="/accounts/orcid/login?next=/sign"><img src="{% static "img/orcid.png" %}" class="button-orcid" alt="ORCID" />&nbsp;With ORCID</a> or <a class="btn btn-default" href="/sign">Manually</a></p>
+<p><a class="btn btn-primary" href="/accounts/orcid/login?next=/sign">With ORCID&nbsp;<img src="{% static "img/orcid.png" %}" class="button-orcid" alt="ORCID" /></a> or <a class="btn btn-default" href="/sign">Manually</a></p>
 {% endif %}
 
 {% endif %}

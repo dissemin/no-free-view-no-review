@@ -40,7 +40,7 @@ hr {
 }
 
 .share-buttons img {
-        height: 2em;
+        height: 2.2em;
 }
 
 #signatories ul {
@@ -53,10 +53,34 @@ hr {
 }
 
 .button-orcid {
-        height: 1.5em;
+        height: 1.25em;
 }
 
 html {
   padding-left: 2em;
   padding-right: 2em;
+  padding-bottom: 3em;
 }
+
+body, .btn {
+        font-size: 16px;
+}
+
+.btn-primary {
+        background-color: #b20f18;
+        border-color: #970c13;
+}
+
+.btn-primary:hover {
+        background-color: #ce1f29;
+        border-color: #970c13;
+}
+
+a {
+        color: #b20f18;
+}
+
+a:hover, a:active {
+        color: #ce1f29;
+}
+

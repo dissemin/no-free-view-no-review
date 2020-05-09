@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from signatories import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('sign', views.SignView.as_view(), name='sign'),
-    path('about', views.about, name='about'),
-    path('thanks', views.thanks, name='thanks'),
-    path('faq', views.faq, name='faq'),
+    path('about', TemplateView.as_view(template_name='about.html'), name='about'),
+    path('thanks', TemplateView.as_view(template_name='thanks.html'), name='thanks'),
+    path('confirm', TemplateView.as_view(template_name='confirm.html'), name='confirm'),
+    path('faq', TemplateView.as_view(template_name='faq.html'), name='faq'),
+    path('confirm/<str:token>', views.confirm_email, name='confirm_email'),
     path('captcha/', include('captcha.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),

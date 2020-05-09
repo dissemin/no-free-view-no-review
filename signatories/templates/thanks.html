@@ -6,6 +6,10 @@
 
 <h2>Thank you for taking the pledge!</h2>
 
+{% if not requests.user.is_authenticated %}
+<p>Your signature will appear once you have confirmed your email address.</p>
+{% endif %}
+
 <p>Share it with your colleagues and collaborators:</p>
 <div class="share-buttons">
         <a href="{{ social_links.twitter }}"><img src="{% static "img/twitter.png" %}" alt="Share on Twitter" /></a>

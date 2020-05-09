@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 PLEDGE_TITLE = 'No free view, no review.'
 PLEDGE_HASHTAG = '#NoFreeViewNoReview'
+ORGANIZERS_EMAIL = 'contact@no-free-view-no-review.org'
 
 # Application definition
 
@@ -61,6 +62,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'nfvnr.tcp.inject_settings',
             ],
         },
     },

@@ -1,13 +1,18 @@
+import os
+import binascii
+
 from django.shortcuts import render
 from django import forms
 from django.conf import settings
 from django.db import IntegrityError
-from .models import Signatory
-from .orcid import form_data_from_orcid_json
+from django.shortcuts import get_object_or_404, redirect
 from allauth.socialaccount.models import SocialAccount
 from captcha.fields import CaptchaField
 from django.utils.http import urlencode
 from django.views.generic.edit import FormView
+
+from .models import Signatory
+from .orcid import form_data_from_orcid_json
 
 def get_user_orcid(user):
     if not user.is_authenticated:
@@ -42,28 +47,16 @@ def index(request):
     context = {
         'pledge_title': settings.PLEDGE_TITLE,
         'social_links': social_links,
-        'signatories': Signatory.objects.all().order_by('timestamp'),
+        'signatories': Signatory.objects.filter(verified=True).order_by('timestamp'),
         'pledge_signed': user_orcid and Signatory.objects.filter(orcid=user_orcid).exists()
     }
     return render(request, 'index.html', context)
 
-def about(request):
-    context = {
-        'pledge_title': settings.PLEDGE_TITLE
-    }
-    return render(request, 'about.html', context)
-
-def thanks(request):
-    context = {
-        'pledge_title': settings.PLEDGE_TITLE
-    }
-    return render(request, 'thanks.html', context)
-
-def faq(request):
-    context = {
-        'pledge_title': settings.PLEDGE_TITLE
-    }
-    return render(request, 'faq.html', context)
+def confirm_email(request, token):
+    signatory = get_object_or_404(Signatory, verification_hash=token)
+    signatory.verified = True
+    signatory.save()
+    return redirect('thanks')
 
 class SignatoryBaseForm(forms.Form):
     name = forms.CharField(required=True, label='Name', max_length=256)
@@ -89,6 +82,12 @@ class SignatoryOrcidForm(SignatoryBaseForm):
 class SignView(FormView):
     template_name = 'sign.html'
     success_url = '/thanks'
+
+    def get_success_url(self):
+        if self.request.user.is_authenticated:
+            return '/thanks'
+        else:
+            return '/confirm'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -124,8 +123,12 @@ class SignView(FormView):
             user=user,
             orcid=user_orcid,
             email=form.cleaned_data['email'],
-            send_updates=form.cleaned_data['send_updates'])
+            send_updates=form.cleaned_data['send_updates'],
+            verified=user_orcid is not None,
+            verification_hash=binascii.hexlify(os.urandom(16)).decode('ascii'))
         signatory.save()
+        if not user_orcid:
+            signatory.send_confirmation_email(self.request)
         return super().form_valid(form)
 
 

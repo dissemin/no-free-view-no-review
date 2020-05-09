@@ -1,0 +1,15 @@
+{% extends "skeleton.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Email confirmation required</h2>
+
+<p>Thank you! Your signature will appear once you have confirmed your email address.</p>
+
+<p><a href="{% url "index" %}">Return to the pledge</a></p>
+
+{% endblock %}
+
+

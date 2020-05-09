@@ -5,6 +5,7 @@ import unittest
 
 from django.test import TestCase
 from django.urls import reverse
+from django.core import mail
 from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialAccount
 
@@ -125,7 +126,13 @@ class ViewsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         html5validate.validate(resp.content)
 
+    def test_confirm(self):
+        resp = self.client.get(reverse('confirm'), follow=True)
+        self.assertEqual(resp.status_code, 200)
+        html5validate.validate(resp.content)
+
     def test_sign_logged_out(self):
+        self.client.logout()
         resp = self.client.get(reverse('sign'), follow=True)
         self.assertEqual(resp.status_code, 200)
         html5validate.validate(resp.content)
@@ -153,6 +160,32 @@ class ViewsTest(TestCase):
         text = resp.content.decode('utf-8')
         self.assertTrue('Dario The King' in text)
         self.assertTrue(self.orcid_id in text)
+
+    def test_submit_not_logged_in(self):
+        self.client.logout()
+        r = self.client.post(reverse('sign'),
+            {'name':'Dario The King',
+             'affiliation': 'ENS',
+             'email': 'dario@foo.com',
+             'captcha_0': 'PASSED',
+             'captcha_1': 'PASSED'
+             })
+
+        # Initially the signature is not verified
+        self.assertFalse(Signatory.objects.get(email='dario@foo.com').verified)
+
+        # Check that a verification email was sent
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertTrue('Email confirmation' in mail.outbox[0].subject)
+        self.assertTrue('The King' in mail.outbox[0].body)
+
+        # Visit the verification link
+        s = Signatory.objects.get(email='dario@foo.com')
+        self.client.get(reverse('confirm_email', args=[s.verification_hash]))
+
+        # Now the signature should be verified
+        self.assertTrue(Signatory.objects.get(email='dario@foo.com').verified)
+
 
     def test_orcid_update_without_email(self):
         form = SignatoryOrcidForm(data={'name':'John Doe', 'affiliation':'ENS', 'homepage':'https://gnu.org/', 'send_updates':'checked'})

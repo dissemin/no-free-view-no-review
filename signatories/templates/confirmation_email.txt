@@ -1,0 +1,17 @@
+Hi {{ name }},
+
+Thank you for signing the "{{ pledge_title }}" pledge!
+Please check that the data below is correct before following the confirmation link below.
+
+Name: {{ name }}
+E-mail: {{ email }}{% if affiliation %}
+Affiliation: {{ affiliation }}
+{% endif %}{% if homepage %}
+Homepage: {{ homepage }}
+{% endif %}
+
+Confirmation: {{ request.scheme }}://{{ request.get_host }}{{ confirmation_link }}
+
+If you are not the originator of this message, please ignore it or contact us at {{ organizers_email }}.
+
+   - CAPSH

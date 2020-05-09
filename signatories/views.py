@@ -93,6 +93,12 @@ class SignView(FormView):
     def form_valid(self, form):
         user = self.request.user if self.request.user.is_authenticated else None
         user_orcid = get_user_orcid(self.request.user)
+        # Cleanup previous signatures from the same person
+        if user_orcid:
+            Signatory.objects.filter(orcid=user_orcid).delete()
+        if form.cleaned_data['email']:
+            Signatory.objects.filter(email=form.cleaned_data['email']).delete()
+        # Save signature
         signatory = Signatory(
             name=form.cleaned_data['name'],
             affiliation=form.cleaned_data['affiliation'],
@@ -101,11 +107,7 @@ class SignView(FormView):
             orcid=user_orcid,
             email=form.cleaned_data['email'],
             send_updates=form.cleaned_data['send_updates'])
-        try:
-            signatory.save()
-        except IntegrityError:
-            # Already signed
-            pass
+        signatory.save()
         return super().form_valid(form)
 
 

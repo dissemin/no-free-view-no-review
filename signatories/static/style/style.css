@@ -14,6 +14,11 @@
         float: right;
         margin-left: 10px;
         margin-bottom: 10px;
+        background: #b20f18;
+        color: white;
+        text-align: center;
+        font-size: 27px;
+        padding: 10px;
 }
 
 .logo-float img {

@@ -6,3 +6,4 @@ __pycache__
 pyflakes.out
 nfvnr/settings/__init__.py
 *.sqlite3
+htmlcov

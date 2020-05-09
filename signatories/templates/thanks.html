@@ -1,0 +1,23 @@
+{% extends "skeleton.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Thank you for taking the pledge!</h2>
+
+<p>Share it with your colleagues and collaborators:</p>
+<div class="share-buttons">
+        <a href="{{ social_links.twitter }}"><img src="{% static "img/twitter.png" %}" alt="Share on Twitter" /></a>
+        <a href="{{ social_links.reddit }}"><img src="{% static "img/reddit.png" %}" alt="Share on Reddit" /></a>
+        <a href="{{ social_links.facebook }}"><img src="{% static "img/facebook.png" %}" alt="Share on Facebook" /></a>
+        <a href="{{ social_links.email }}"><img src="{% static "img/email.png" %}" alt="Share by email" /></a>
+</div>
+<p>Please also consider adding a mention or link to the pledge on your
+website.</p>
+
+<p><a href="{% url "index" %}">Return to the pledge</a></p>
+
+{% endblock %}
+
+

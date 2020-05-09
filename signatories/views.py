@@ -21,7 +21,6 @@ def index(request):
     user_orcid = get_user_orcid(request.user)
 
     this_uri = request.build_absolute_uri()
-    signatory_saved = request.META.get('HTTP_REFERER') == this_uri + 'sign'
     social_links = {
         'twitter': 'https://twitter.com/share?' + urlencode({
             'url': this_uri,
@@ -44,7 +43,7 @@ def index(request):
         'pledge_title': settings.PLEDGE_TITLE,
         'social_links': social_links,
         'signatories': Signatory.objects.all().order_by('timestamp'),
-        'pledge_signed': signatory_saved or (user_orcid and Signatory.objects.filter(orcid=user_orcid).exists())
+        'pledge_signed': user_orcid and Signatory.objects.filter(orcid=user_orcid).exists()
     }
     return render(request, 'index.html', context)
 
@@ -53,6 +52,12 @@ def about(request):
         'pledge_title': settings.PLEDGE_TITLE
     }
     return render(request, 'about.html', context)
+
+def thanks(request):
+    context = {
+        'pledge_title': settings.PLEDGE_TITLE
+    }
+    return render(request, 'thanks.html', context)
 
 def faq(request):
     context = {
@@ -74,9 +79,16 @@ class SignatoryOrcidForm(SignatoryBaseForm):
     email = forms.EmailField(required=False, label='Email (optional)')
     send_updates = forms.BooleanField(label='Send me occasional updates about this initiative', required=False)
 
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        if cleaned_data.get('send_updates') and not cleaned_data.get('email'):
+            self.add_error('email', 'This field is required if you want to receive updates about the initiative')
+        return cleaned_data
+
 class SignView(FormView):
     template_name = 'sign.html'
-    success_url = '/'
+    success_url = '/thanks'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

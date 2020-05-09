@@ -43,18 +43,6 @@ fair number of reviews to venues where we have published</p>
 <p><a class="btn btn-primary" href="/accounts/orcid/login?next=/sign"><img src="{% static "img/orcid.png" %}" class="button-orcid" alt="ORCID" />&nbsp;With ORCID</a> or <a class="btn btn-default" href="/sign">Manually</a></p>
 {% endif %}
 
-{% else %}
-<h2>Thank you for taking the pledge!</h2>
-
-<p>Share it with your colleagues and collaborators:</p>
-<div class="share-buttons">
-        <a href="{{ social_links.twitter }}"><img src="{% static "img/twitter.png" %}" alt="Share on Twitter" /></a>
-        <a href="{{ social_links.reddit }}"><img src="{% static "img/reddit.png" %}" alt="Share on Reddit" /></a>
-        <a href="{{ social_links.facebook }}"><img src="{% static "img/facebook.png" %}" alt="Share on Facebook" /></a>
-        <a href="{{ social_links.email }}"><img src="{% static "img/email.png" %}" alt="Share by email" /></a>
-</div>
-<p>Please also consider adding a mention or link to the pledge on your
-website.</p>
 {% endif %}
 
 <h2>Signatories <span class="badge">{{ signatories|length }}</span></h2>

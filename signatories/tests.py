@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from allauth.socialaccount.models import SocialAccount
 
 from signatories.orcid import name, institution, jpath, urlize, homepage, form_data_from_orcid_json
-from signatories.views import get_user_orcid
+from signatories.views import get_user_orcid, SignatoryOrcidForm
 from signatories.models import Signatory
 
 def loadProfile(id):
@@ -120,6 +120,11 @@ class ViewsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         html5validate.validate(resp.content)
 
+    def test_thanks(self):
+        resp = self.client.get(reverse('thanks'), follow=True)
+        self.assertEqual(resp.status_code, 200)
+        html5validate.validate(resp.content)
+
     def test_sign_logged_out(self):
         resp = self.client.get(reverse('sign'), follow=True)
         self.assertEqual(resp.status_code, 200)
@@ -136,3 +141,23 @@ class ViewsTest(TestCase):
         self.assertFalse('captcha' in resp.content.decode('utf-8'))
         # And the form is prefilled with info obtained from ORCID
         self.assertTrue('Darío' in resp.content.decode('utf-8'))
+
+    def test_submit_logged_in(self):
+        # Add a signature while logged in via ORCID
+        self.client.force_login(self.orcid_user)
+        self.client.post(reverse('sign'),
+            {'name':'Dario The King',
+             'affiliation':'JHU'})
+        # Check that the supplied name and ORCID appear in the list
+        resp = self.client.get(reverse('index'), follow=True)
+        text = resp.content.decode('utf-8')
+        self.assertTrue('Dario The King' in text)
+        self.assertTrue(self.orcid_id in text)
+
+    def test_orcid_update_without_email(self):
+        form = SignatoryOrcidForm(data={'name':'John Doe', 'affiliation':'ENS', 'homepage':'https://gnu.org/', 'send_updates':'checked'})
+        self.assertFalse(form.is_valid())
+        form = SignatoryOrcidForm(data={'name':'John Doe', 'affiliation':'ENS', 'homepage':'https://gnu.org/', 'send_updates':False})
+        self.assertTrue(form.is_valid())
+        form = SignatoryOrcidForm(data={'name':'John Doe', 'affiliation':'ENS', 'homepage':'https://gnu.org/', 'send_updates':True, 'email':'john@doe.com'})
+        self.assertTrue(form.is_valid())

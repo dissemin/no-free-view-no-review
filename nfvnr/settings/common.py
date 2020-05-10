@@ -16,7 +16,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-PLEDGE_TITLE = 'No free view, no review.'
+PLEDGE_TITLE = 'My Catchy Pledge Title'
+PLEDGE_DESCRIPTION = 'Some pledge description'
 PLEDGE_HASHTAG = '#NoFreeViewNoReview'
 ORGANIZERS_EMAIL = 'contact@no-free-view-no-review.org'
 

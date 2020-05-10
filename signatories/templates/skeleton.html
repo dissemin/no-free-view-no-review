@@ -8,14 +8,13 @@
                 <title>{{ pledge_title }}</title>
                 <link rel="stylesheet" href="{% static "style/bootstrap.min.css" %}" type="text/css" />
                 <link rel="stylesheet" href="{% static "style/style.css" %}" type="text/css" />
-                <meta name="description" content="We do not review for closed-access publications." />
+                <meta name="description" content="We pledge to give priority to open-access venues in how we allocate our reviewing time, program committee or board membership, and organizational efforts. We try to avoid serving as reviewers for venues which will not make publicly available the research that we have reviewed." />
                 <meta name="twitter:card" content="summary" />
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content="{{ pledge_title }}" />
                 <meta property="og:url" content="{{ request.get_full_path }}" />
-
-                <!-- TODO: add logo -->
-                <meta property="og:image" content="{% static "img/our_logo.png" %}" />
+                <meta property="og:image" content="{% static "img/square-logo.png" %}" />
+                <link rel="icon" type="image/png" href="{% static "img/square-logo.png" %}" />
         </head>
         <body>
                 <div id="container">

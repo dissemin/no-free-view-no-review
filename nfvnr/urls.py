@@ -18,6 +18,10 @@ from django.urls import include, path
 from signatories import views
 from django.views.generic import TemplateView
 
+from django.conf import settings
+
+settings.SETUP_ADMIN_LOGIN()
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('sign', views.SignView.as_view(), name='sign'),

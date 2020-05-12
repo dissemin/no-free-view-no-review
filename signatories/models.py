@@ -43,4 +43,4 @@ class Signatory(models.Model):
         )
 
     class Meta:
-        verbose_name_plural = "Categories"
+        verbose_name_plural = "Signatories"

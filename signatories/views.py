@@ -4,7 +4,6 @@ import binascii
 from django.shortcuts import render
 from django import forms
 from django.conf import settings
-from django.db import IntegrityError
 from django.shortcuts import get_object_or_404, redirect
 from allauth.socialaccount.models import SocialAccount
 from captcha.fields import CaptchaField
@@ -55,6 +54,8 @@ def index(request):
 def confirm_email(request, token):
     signatory = get_object_or_404(Signatory, verification_hash=token)
     signatory.verified = True
+    # Delete any previously validated signature from the same email
+    Signatory.objects.filter(email=signatory.email, verified=True).delete()
     signatory.save()
     return redirect('thanks')
 
@@ -74,7 +75,6 @@ class SignatoryOrcidForm(SignatoryBaseForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        email = cleaned_data.get('email')
         if cleaned_data.get('send_updates') and not cleaned_data.get('email'):
             self.add_error('email', 'This field is required if you want to receive updates about the initiative')
         return cleaned_data
@@ -113,8 +113,8 @@ class SignView(FormView):
         # Cleanup previous signatures from the same person
         if user_orcid:
             Signatory.objects.filter(orcid=user_orcid).delete()
-        if form.cleaned_data['email']:
-            Signatory.objects.filter(email=form.cleaned_data['email']).delete()
+            if form.cleaned_data['email']:
+                Signatory.objects.filter(email=form.cleaned_data['email']).delete()
         # Save signature
         signatory = Signatory(
             name=form.cleaned_data['name'],

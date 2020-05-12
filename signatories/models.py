@@ -14,7 +14,7 @@ class Signatory(models.Model):
     timestamp = models.DateField(auto_now=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     orcid = models.CharField(max_length=20, null=True, blank=True, unique=True)
-    email = models.CharField(max_length=256, null=True, blank=True, unique=True)
+    email = models.CharField(max_length=256, null=True, blank=True, db_index=True)
     send_updates = models.BooleanField(default=True)
     verified = models.BooleanField(default=True)
     verification_hash = models.CharField(max_length=64, null=True, blank=True)

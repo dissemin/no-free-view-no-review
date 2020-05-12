@@ -1,10 +1,10 @@
-No free view, no review
-=======================
+No free view? no review!
+========================
 
-[![Build Status](https://travis-ci.org/dissemin/no-free-view-no-review.svg?branch=master)](https://travis-ci.org/dissemin/no-free-view-no-review)
+[![Build Status](https://travis-ci.com/dissemin/no-free-view-no-review.svg?token=vbDxkTY7k7fuYEqBFHjD&branch=master)](https://travis-ci.com/dissemin/no-free-view-no-review)
 [![Coverage Status](https://coveralls.io/repos/dissemin/no-free-view-no-review/badge.svg?branch=master&service=github)](https://coveralls.io/github/dissemin/no-free-view-no-review?branch=master)
 
-Sign the pledge: https://no-free-view-no-review.org/
+Sign the pledge: https://nofreeviewnoreview.org/
 
 This is a [CAPSH](https://association.dissem.in/) project.
 

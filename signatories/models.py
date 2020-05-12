@@ -41,3 +41,6 @@ class Signatory(models.Model):
             [self.email],
             fail_silently=False,
         )
+
+    class Meta:
+        verbose_name_plural = "Categories"

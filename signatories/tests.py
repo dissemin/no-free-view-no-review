@@ -161,9 +161,38 @@ class ViewsTest(TestCase):
         self.assertTrue('Dario The King' in text)
         self.assertTrue(self.orcid_id in text)
 
+    def test_submit_logged_in_after_manually_signed(self):
+        # Assume we already have a verified manual signature from Dario
+        Signatory(name='Dario Manfred',
+            affiliation='NSU',
+            homepage='https://gnu.org',
+            email='dario@king.com',
+            verified=True
+        ).save()
+
+        # It appears in the list
+        resp = self.client.get(reverse('index'), follow=True)
+        text = resp.content.decode('utf-8')
+        self.assertTrue('Dario Manfred' in text)
+        self.assertTrue('NSU' in text)
+
+        # Add a signature while logged in via ORCID
+        self.client.force_login(self.orcid_user)
+        self.client.post(reverse('sign'),
+            {'name':'Dario The King',
+             'affiliation':'JHU',
+             'email':'dario@king.com'})
+        # Check that the supplied name and ORCID appear in the list
+        resp = self.client.get(reverse('index'), follow=True)
+        text = resp.content.decode('utf-8')
+        self.assertTrue('Dario The King' in text)
+        self.assertTrue('Dario Manfred' not in text)
+        self.assertTrue(self.orcid_id in text)
+
+
     def test_submit_not_logged_in(self):
         self.client.logout()
-        r = self.client.post(reverse('sign'),
+        self.client.post(reverse('sign'),
             {'name':'Dario The King',
              'affiliation': 'ENS',
              'email': 'dario@foo.com',

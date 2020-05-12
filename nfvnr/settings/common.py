@@ -101,6 +101,10 @@ ACCOUNT_LOGOUT_ON_GET = True
 
 SITE_ID = 1 # required for allauth
 
+# Callback used to bind admin login to allauth (once auth is set up properly)
+# Redefined in prod.py
+SETUP_ADMIN_LOGIN = lambda: ()
+
 # Crispy forms
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3' # because Bootstrap 4 sucks

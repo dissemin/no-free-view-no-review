@@ -24,6 +24,13 @@ def get_user_orcid(user):
 def index(request):
     user_orcid = get_user_orcid(request.user)
 
+    context = {
+        'signatories': Signatory.objects.filter(verified=True).order_by('timestamp'),
+        'pledge_signed': user_orcid and Signatory.objects.filter(orcid=user_orcid).exists()
+    }
+    return render(request, 'index.html', context)
+
+def thanks(request):
     this_uri = request.build_absolute_uri()
     social_links = {
         'twitter': 'https://twitter.com/share?' + urlencode({
@@ -44,12 +51,9 @@ def index(request):
     }
 
     context = {
-        'pledge_title': settings.PLEDGE_TITLE,
-        'social_links': social_links,
-        'signatories': Signatory.objects.filter(verified=True).order_by('timestamp'),
-        'pledge_signed': user_orcid and Signatory.objects.filter(orcid=user_orcid).exists()
+        'social_links': social_links
     }
-    return render(request, 'index.html', context)
+    return render(request, 'thanks.html', context)
 
 def confirm_email(request, token):
     signatory = get_object_or_404(Signatory, verification_hash=token)

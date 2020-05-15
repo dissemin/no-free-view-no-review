@@ -29,6 +29,7 @@ urlpatterns = [
     path('thanks', TemplateView.as_view(template_name='thanks.html'), name='thanks'),
     path('confirm', TemplateView.as_view(template_name='confirm.html'), name='confirm'),
     path('faq', TemplateView.as_view(template_name='faq.html'), name='faq'),
+    path('visuals', TemplateView.as_view(template_name='visuals.html'), name='visuals'),
     path('confirm/<str:token>', views.confirm_email, name='confirm_email'),
     path('captcha/', include('captcha.urls')),
     path('admin/', admin.site.urls),

@@ -14,11 +14,6 @@
         float: right;
         margin-left: 10px;
         margin-bottom: 10px;
-        background: #b20f18;
-        color: white;
-        text-align: center;
-        font-size: 27px;
-        padding: 10px;
 }
 
 .logo-float img {
@@ -85,7 +80,10 @@ a {
         color: #b20f18;
 }
 
-a:hover, a:active {
+a:hover, a:active, a:focus {
         color: #ce1f29;
 }
 
+.well {
+        display: inline-block;
+}

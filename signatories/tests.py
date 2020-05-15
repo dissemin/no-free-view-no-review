@@ -131,6 +131,11 @@ class ViewsTest(TestCase):
         self.assertEqual(resp.status_code, 200)
         html5validate.validate(resp.content)
 
+    def test_visuals(self):
+        resp = self.client.get(reverse('visuals'), follow=True)
+        self.assertEqual(resp.status_code, 200)
+        html5validate.validate(resp.content)
+
     def test_sign_logged_out(self):
         self.client.logout()
         resp = self.client.get(reverse('sign'), follow=True)

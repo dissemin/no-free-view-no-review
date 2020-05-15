@@ -15,7 +15,7 @@
                 <meta property="og:title" content="{{ pledge_title }}" />
                 <meta property="og:description" content="{{ pledge_description }}" />
                 <meta property="og:url" content="{{ request.get_full_path }}" />
-                <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static "img/square-logo.png" %}" />
+                <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static "img/nfvnr-logo-512.png" %}" />
                 <link rel="icon" type="image/png" href="{% static "img/favicon.png" %}" />
         </head>
         <body>
@@ -24,6 +24,7 @@
                 <div id="toplinks">
                 <ul class="nav nav-pills">
                      <li role="presentation"><a href="{% url 'faq' %}">FAQ</a></li>
+                     <li role="presentation"><a href="{% url 'visuals' %}">Visuals</a></li>
                      <li role="presentation"><a href="{% url 'about' %}">About</a></li>
                      {% if request.user.is_authenticated %}
                      <li role="presentation"><a href="/accounts/logout">Log out</a></li>

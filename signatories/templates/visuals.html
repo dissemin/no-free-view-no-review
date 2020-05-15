@@ -1,0 +1,41 @@
+{% extends "skeleton.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h2>Visuals</h2>
+
+<p>You can use the images on this page to promote the pledge. They are released under the <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC-0 license</a>.</p>
+
+<p>Contributions are welcome, <a href="{% url "about" %}">send us</a> your campaign materials and we will list them here.</p>
+
+<h3>Banner</h3>
+
+<div class="well">
+<a href="{% static "img/nfvnr-banner.svg" %}"><img src="{% static "img/nfvnr-banner.svg" %}" alt="No free view? No review!" width="250px" /></a>
+</div>
+
+<p>Available in <a href="{% static "img/nfvnr-banner.svg" %}">SVG</a> (25 KB) and <a href="{% static "img/nfnvr-banner.png" %}">PNG</a> (242 KB).</p>
+
+<h3>Logo</h3>
+
+<div class="well">
+<a href="{% static "img/nfvnr-logo.svg" %}"><img src="{% static "img/nfvnr-logo.svg" %}" alt="Square logo of the campaign" width="200px" /></a>
+</div>
+
+<p>Available in <a href="{% static "img/nfvnr-logo.svg" %}">SVG</a> (8 KB) and <a href="{% static "img/nfnvr-logo.png" %}">PNG</a> (168 KB).</p>
+
+<h3>Poster</h3>
+
+<div class="well">
+<a href="{% static "img/nfvnr-poster.svg" %}"><img src="{% static "img/nfvnr-poster.svg" %}" alt="Poster of the campaign" width="250px" /></a>
+</div>
+
+<p>Available in <a href="{% static "img/nfvnr-poster.svg" %}">SVG</a> (84 KB), <a href="{% static "img/nfvnr-poster.pdf" %}">PDF</a> (21 KB) and <a href="{% static "img/nfnvr-poster.png" %}">PNG</a> (326 KB).</p>
+
+<p><a href="{% url "index" %}">Return to the pledge</a></p>
+
+{% endblock %}
+
+

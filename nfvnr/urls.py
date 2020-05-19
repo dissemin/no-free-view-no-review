@@ -26,7 +26,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('sign', views.SignView.as_view(), name='sign'),
     path('about', TemplateView.as_view(template_name='about.html'), name='about'),
-    path('thanks', TemplateView.as_view(template_name='thanks.html'), name='thanks'),
+    path('thanks', views.thanks, name='thanks'),
     path('confirm', TemplateView.as_view(template_name='confirm.html'), name='confirm'),
     path('faq', TemplateView.as_view(template_name='faq.html'), name='faq'),
     path('visuals', TemplateView.as_view(template_name='visuals.html'), name='visuals'),

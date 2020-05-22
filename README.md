@@ -41,7 +41,7 @@ Create a new social application at http://127.0.0.1:8000/admin/socialaccount/soc
 
 Select orcid.org as provider
 Input the client ID and secret in the first two text fields.
-Add the example.com site to the list of allowed sites
+Add the example.com site to the list of allowed sites (which you can later rename to the actual domain name, but that is not strictly needed).
 Save the social app.
 
 For production, do the same with https://orcid.org/ instead of https://sandbox.orcid.org/.

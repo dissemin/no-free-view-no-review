@@ -25,7 +25,7 @@ def index(request):
     user_orcid = get_user_orcid(request.user)
 
     context = {
-        'signatories': Signatory.objects.filter(verified=True).order_by('timestamp'),
+        'signatories': Signatory.objects.filter(verified=True).order_by('timestamp', 'id'),
         'pledge_signed': user_orcid and Signatory.objects.filter(orcid=user_orcid).exists()
     }
     return render(request, 'index.html', context)

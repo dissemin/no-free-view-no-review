@@ -37,7 +37,7 @@ This gives you a pair of client ID and client secret.
 
 Log into the admin interface at http://localhost:8000/admin/ with your superuser credentials created above.
 
-Create a new social application at http://127.0.0.1:8000/admin/socialaccount/socialapp/add/
+Create a new social application at http://localhost:8000/admin/socialaccount/socialapp/add/
 
 Select orcid.org as provider
 Input the client ID and secret in the first two text fields.

@@ -34,8 +34,3 @@ jobs:
     - name: Run tests
       run: |
         coverage run --source=signatories manage.py test
-    - name: Submit coverage results
-      run: |
-        coveralls --finish
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

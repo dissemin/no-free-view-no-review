@@ -1,6 +1,6 @@
-django==3.2.25
-django-allauth==0.43.0
-django-crispy-forms==1.9.2
+django==6.0.5
+django-allauth==65.16.1
+django-crispy-forms==1.14.0
 html5validate==0.0.2
 html5lib==1.1
-django-simple-captcha==0.5.13
+django-simple-captcha==0.6.3
